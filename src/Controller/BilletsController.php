@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -71,38 +72,42 @@ class BilletsController extends AbstractController
     }
 
 
-    // Pour les afficher sur la page userForm.html.twig
+    // Pour afficher un formulaire sur la page userForm.html.twig
 
     /**
      * @Route("/reservation", name="reservation")
-     * @return Response
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @return RedirectResponse|Response
+     * @throws Exception
      */
 
-    public function create() {
+    public function create( Request $request ) {
         $reservation = new Reservation();
 
         $form = $this   ->createFormBuilder($reservation)
 
-                        ->add('nom', TextType::class, [
-                            'attr'=> [
-                                'placeholder'=> " Entrer votre Nom",
-                                'class'=> 'form-control'
-                            ]
-                        ])
-                        ->add('prenom', TextType::class, [
-                            'attr'=> [
-                                'placeholder'=> " Entrer votre Prenom",
-                                'class'=> 'form-control'
-                            ]
-                        ])
-                        ->add('email', TextType::class, [
-                            'attr'=> [
-                                'placeholder'=> " Entrer votre Email",
-                                'class'=> 'form-control'
-                            ]
-                        ])
-                        ->add('Valider',SubmitType::class, array('label'=> 'Valider'))
+                        ->add('nom')
+                        ->add('prenom')
+                        ->add('email')
                         ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $reservation->setDate_Reservation(new\DateTime());
+            $reservation->setTitre("Musée du Louvre");
+            $reservation->setImage("http://placeholder.it/350x130");
+
+
+            $manager->persist($reservation);
+            $manager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        dump($reservation);
 
         return $this->render('order/create.html.twig',[
             'form'=>$form->createView()
