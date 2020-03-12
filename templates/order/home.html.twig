@@ -7,5 +7,29 @@
     <hr>
     <p> <div style="text-align: center;"> Lorem ipsum,dolore !! </div>
 
+    <section class="reservation"
+
+        {% for reservation in reservations %}
+
+     <reservation>
+
+
+         <h2> BILLET JOURNEE </h2>
+         <h3> {{ reservation.nom | raw }}</h3>
+         <h3> {{ reservation.prenom | raw }}</h3>
+         <h3> {{ reservation.titre | raw }}</h3>
+         <div class="metadata"> Date le  </div>
+         <div class="content">
+             <img src=" http://placehold.it/350x150 " alt="">
+             <br>
+             <br>
+             <a href="{{ path('billeterie',{'id':reservation.nom | raw }) }}" class="btn-primary"> Réserver maintenant </a>
+
+         </div>
+     </reservation>
+
+        {% endfor %}
+
+    </section>
 
 {% endblock %}
