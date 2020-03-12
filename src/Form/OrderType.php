@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Order;
+use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-//use Ramsey\Uuid\Uuid;
+
 
 class OrderType extends AbstractType
 {
@@ -17,17 +17,16 @@ class OrderType extends AbstractType
     {
         $builder
            
-            ->add('visitDate', DateType::class)
+            ->add('nom', DateType::class)
             ->add('visitDuration', CheckboxType::class)
             ->add('ticketsNumber', IntegerType::class)
-            // ->add('uuid', UuidType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Order::class,
+            'data_class' => Reservation::class,
         ]);
     }
 }
