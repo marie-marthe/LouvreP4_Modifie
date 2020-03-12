@@ -6,6 +6,9 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.8",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "laminas/laminas-code": "^3.4",
+        "laminas/laminas-eventmanager": "^3.2",
         "phpunit/phpunit": "^9.0",
         "ramsey/uuid": "^3.9",
         "stripe/stripe-php": "^7.27",
@@ -17,6 +20,8 @@
         "symfony/framework-bundle": "5.0.*",
         "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "5.0.*",
+        "symfony/validator": "5.0.*",
+        "symfony/var-dumper": "5.0.*",
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
