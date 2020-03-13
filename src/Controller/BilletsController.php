@@ -5,17 +5,12 @@ namespace App\Controller;
 
 
 use App\Entity\Reservation;
-use Doctrine\DBAL\Types\DateType;
-use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Form\ReservationType;
 
 
@@ -102,8 +97,6 @@ class BilletsController extends AbstractController
 
             return $this->redirectToRoute('home'); // si tout est ok retourne à la page "home"
         }
-
-        dump($reservation);
 
         return $this->render('order/create.html.twig',[
             'form'=>$form->createView()

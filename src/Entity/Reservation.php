@@ -65,7 +65,7 @@ class Reservation
     /**
      * @ORM\Column(type="integer")
      * @Assert\Email(
-     *     message = "Votre email n'est pas valide."
+     *     message = "Votre email n'est pas valide.")
      */
     private $code_reservation;
 
@@ -291,6 +291,25 @@ class Reservation
 
         return $this;
     }
+
+    /**
+     * @return Collection|Billet[]
+     */
+    public function getBillets(): Collection
+    {
+        return $this->billets;
+    }
+
+    public function addBillet(Billet $billet): self
+    {
+        if (!$this->billets->contains($billet)) {
+            $this->billets[] = $billet;
+            $billet->setDateBillet($this);
+        }
+
+        return $this;
+    }
+
 
 
 }
