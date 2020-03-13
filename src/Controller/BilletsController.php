@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\ReservationType;
 
 
 
@@ -77,21 +78,16 @@ class BilletsController extends AbstractController
     /**
      * @Route("/reservation", name="reservation")
      * @param Request $request
-     * @param ObjectManager $manager
      * @return RedirectResponse|Response
      * @throws Exception
      */
 
-    public function create( Request $request ) {
+    public function form( Request $request ) {
+
         $reservation = new Reservation();
 
-        $form = $this   ->createFormBuilder($reservation)
 
-                        ->add('nom')
-                        ->add('prenom')
-                        ->add('email')
-                        ->getForm();
-
+        $form= $this -> createForm(ReservationType::class, $reservation);
 
         $form->handleRequest($request);
 
@@ -101,10 +97,10 @@ class BilletsController extends AbstractController
             $reservation->setImage("http://placeholder.it/350x130");
 
 
-            $manager->persist($reservation);
-            $manager->flush();
+            //$manager->persist($reservation); // faire persister l'article
+            //$manager->flush(); // lancer la requête
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home'); // si tout est ok retourne à la page "home"
         }
 
         dump($reservation);
@@ -113,6 +109,8 @@ class BilletsController extends AbstractController
             'form'=>$form->createView()
 
             ]);
+
+
 
 
     }
