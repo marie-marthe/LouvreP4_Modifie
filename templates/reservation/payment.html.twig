@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+
+	<!-- Intro -->
+
+
+	<form action="/Services/Stripe.php" class=" ui form" id="payment_form">
+
+
+		<div class="field">
+
+			<label>
+				<input type="text" name="name" required placeholder=" Votre Nom">
+			</label>
+
+		</div>
+
+
+		<div class="field">
+			<label>
+				<input type="email" name="email" required placeholder="Votre email@email.com">
+			</label>
+
+		</div>
+
+
+		<div class="field">
+
+			<label>
+				<input type="text" placeholder="Votre code de carte bleue" required>
+			</label>
+
+		</div>
+
+
+		<div class="field">
+
+			<label>
+				<input type="text" placeholder="MM" data-stripe="exp_month">
+			</label>
+
+		</div>
+
+
+		<div class="field">
+
+			<label>
+				<input type="text" placeholder="AAAA" data-stripe="exp_year">
+			</label>
+
+		</div>
+
+
+		<div class="field">
+
+			<label>
+				<input type="text" placeholder="CVC" data-stripe="cvc">
+			</label>
+
+		</div>
+
+		<button type="submit" class="btn btn-success"> Valider </button>
+
+	</form>
+
+
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="https://js.stripe.com/v2/"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+			Stripe.setPublishableKey('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
+				const $form = $('payment_form');
+				$form.submit(function (e) {
+				e.preventDefault()
+
+				$form.find('.button').attr('disabled',true)
+
+			Stripe.card.createToken($form, function (status,response) {
+
+				debugger
+
+			})
+
+		})
+
+	</script>
+
+
+{% endblock %}

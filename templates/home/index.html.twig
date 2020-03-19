@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+    {% block body %}
+
+        <h1 class="h3 mb-5 text-center">
+            Nouvelle réservation
+        </h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        {{ form_end(form) }}
+
+    {% endblock %}
+
+    {# we keep just  the widget in the persons row, this way we remove all the default text at once #}
+    {% block _reservation_persons_row %}
+
+        {{ form_widget(form) }}
+
+    {% endblock %}
+
+    {# customizing the persons widget, creating all the code common to the whole persons collection at once which is a "visiteurs" title before the collection and the "ajoutez un visiteur" button to add a new visitor after the collection #}
+    {% block _reservation_persons_widget %}
+
+        <hr class="my-5">
+
+        <h2 class="h4 mb-3 text-center">
+            Visiteurs
+        </h2>
+
+        {{ form_widget(form) }}
+
+        <div class="form-group mb-5">
+            <button type="button" id="addPerson" class="btn btn-primary mt-4">
+                Ajoutez un visiteur
+            </button>
+        </div>
+
+    {% endblock %}
+
+    {# generating the code of the persons (each element of the collection) which is mainly a delete button #}
+    {% block _reservation_persons_entry_row %}
+        <div class="form-group" id="block_{{id}}">
+            <hr class="my-5" id="hr_{{id}}">
+            {{ form_widget(form) }}
+            <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">
+                Supprimer le visiteur
+            </button>
+        </div>
+    {% endblock %}
+
+    {# handling the add and delete buttons #}
+    {% block javascripts %}
+
+
+
+    {% endblock %}
