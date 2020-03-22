@@ -1,35 +1,106 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-
-    <h1> <div style="text-align: center;"> Billeterie du Musée du Louvre </div> </h1>
-
-    <hr>
-    <p> <div style="text-align: center;"> Lorem ipsum,dolore !! </div>
-
-    <section class="reservation"
-
-        {% for reservation in reservations %}
-
-     <reservation>
+{% extends 'base.html.twig'%}
 
 
-         <h2> BILLET JOURNEE </h2>
-         <h3> {{ reservation.nom | raw }}</h3>
-         <h3> {{ reservation.prenom | raw }}</h3>
-         <h3> {{ reservation.titre | raw }}</h3>
-         <div class="metadata"> Date le  </div>
-         <div class="content">
-             <img src=" http://placehold.it/350x150 " alt="">
-             <br>
-             <br>
-             <a href="{{ path('billeterie',{'id':reservation.nom | raw }) }}" class="btn-primary"> Réserver maintenant </a>
+{% block content %}
 
-         </div>
-     </reservation>
+    <div class="container">
 
-        {% endfor %}
+        <div class="tarification">
+            <dl>
+                <dt>Tarifs du musée:</dt>
 
-    </section>
+                <dd>
+                    De 4 à 12 ans : 8 euros.
+                </dd>
+                <dd>
+                    De 13 à 59 ans : 16 euros.
+                </dd>
+                <dd>
+                    60 ans et plus : 12 euros.
+                </dd>
+                <dd>
+                    Tarif réduit : 10 euros.
+                </dd>
+                <dd>
+                    L'entrée est gratuite pour les enfants de moins de 3 ans.
+                </dd>
+            </dl>
+
+        </div>
+        <div class="well">
+            <h1 style="text-align: center">Votre réservation</h1>
+            <!-- BreadCrumb-->
+            <ol class="breadcrumb" style="text-align: center">
+            </ol>
+            <!-- Content-->
+
+            <p style="text-align: center">Le musée est ouvert tous les jours de 09h00 à 18h00, sauf le Mardi.
+                Fermeture les 1er Mai, 1er Novembre et 25 décembre.
+            </p>
+
+            <br>
+
+            <div class="command" >
+
+                <div class="col-sm-8" id="command-form">
+
+                    <div id="">
+
+                        <br>
+                        <br>
+                        <br>
+
+                        {{ form_start(form) }}
+
+                        {{ form_row(form.dateVisite) }}<br/>
+
+                        {{ form_row(form.demijournee) }}<br/>
+
+                        {{ form_row(form.nbTicket) }}<br/>
+
+                        {{ form_row(form.mail) }}<br/>
+
+
+                        <div id="booking_control">
+
+                            <div class="col-sm-11">
+                                <button type="submit" class="btn btn-success">{{ 'Valider' | trans }}</button>
+                            </div>
+
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('build/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('build/js/bootstrap-datepicker.fr.js') }}" charset="UTF-8"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            // datepicker parameters
+                jQuery = $('.datepicker').datepicker({
+                language: 'fr',
+                format: 'dd-mm-yyyy',
+                orientation: 'bottom',
+                startDate: 'today',
+                todayHighlight: 'true',
+                daysOfWeekDisabled: '2'
+            });},)
+    </script>
+
+{% endblock %}
+
+
+
+
