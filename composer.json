@@ -22,7 +22,8 @@
         "symfony/twig-bundle": "5.0.*",
         "symfony/validator": "5.0.*",
         "symfony/var-dumper": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+      "ext-libsodium": "*"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.14",
