@@ -23,12 +23,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://www.louvre.fr">Musée du Louvre</a>
+            <a class="navbar-brand" href="https://www.louvre.fr">MUSEE DU LOUVRE</a>
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{{ path('accueil') }}">ACCUEIL</a></li>
+                <li><a href="{{ path('home') }}">BILLETTERIE</a> </li>
              <li class="dropdown"></li>
             </ul>
         </div>
@@ -41,8 +42,121 @@
 <div class="w3-container">
 
         {% block body %}
+            {% block content %}
+                <div class="container-fluid" id="homepage-content">
+                    <div class="row" id="carousel">
+                        <div class="col-sm-12">
+                            <!-- CARROUSSELL -->
+
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <img src="{{ asset ('/build/images/1.40cae0e3.jpg') }}" class="img-responsive" alt="image 1">
+                                        <div class="carousel-caption">
+                                            <h3>Commander vos billets en ligne! </h3>
+                                            <a href="{{ path('home') }}">
+                                                <button class="btn btn-default">Billetterie</button>
+                                            </a><br/><br/>
+                                            <P>
+                                                Ouvert tous les jours de 09h00 à 18h00 sauf le mardi.<br/>
+                                                Fermeture les 1er mai, 1er novembre et 25 décembre.
+                                            </P>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="{{ asset('/build/images/2.fba60640.jpg') }}" class="img-responsive" alt="image 2">
+                                        <div class="carousel-caption">
+                                            <h3 style="color: black">Actuellement en exposition</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="{{ asset('/build/images/3.4125fdf2.jpg') }}" class="img-responsive" alt="image 3">
+                                        <div class="carousel-caption">
+                                            <h1></h1>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CONTENT -->
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Actualités</div>
+                                    <div class="panel-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                                        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+                                        Aliquam in felis sit amet augue.<br/><br/>
+                                        <button type="button" class="btn btn-default">Lire la suite ></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Visites & Expositions</div>
+                                    <div class="panel-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                                        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+                                        Aliquam in felis sit amet augue.<br/><br/>
+                                        <button type="button" class="btn btn-default">Lire la suite ></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Informations pratiques</div>
+                                    <div class="panel-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                        Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
+                                        dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
+                                        Aliquam in felis sit amet augue.<br/><br/>
+                                        <button type="button" class="btn btn-default">Lire la suite ></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endblock %}
 
         {% endblock %}
+
+    <footer style="margin-bottom: 0;padding-bottom: 0">
+        <div class="panel-footer" style="text-align: right;margin-bottom:0">
+            <p class="pull-left">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Ce site est un site factice. Il a été créer dans le cadre d'un projet de formation.
+            </p>
+            <span><i class="fa fa-copyright fa-lg"></i> Copyright</span>
+
+        </div>
+    </footer>
 
 </div>
 
