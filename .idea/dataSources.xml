@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:8889/Projet4TELBOISMM</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="PROJET_4_TELBOISMM@localhost" uuid="3c9a4a3d-5af1-484e-93f2-ab44e3566b78">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:8889/PROJET_4_TELBOISMM</jdbc-url>
+    </data-source>
   </component>
 </project>
