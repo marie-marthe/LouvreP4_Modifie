@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200311192011 extends AbstractMigration
+final class Version20200321181551 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,9 @@ final class Version20200311192011 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE reservation CHANGE email email VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE client ADD idcommand_id INT NOT NULL');
+        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C7440455FE4875A0 FOREIGN KEY (idcommand_id) REFERENCES command (id)');
+        $this->addSql('CREATE INDEX IDX_C7440455FE4875A0 ON client (idcommand_id)');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +32,8 @@ final class Version20200311192011 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE reservation CHANGE email email INT NOT NULL');
+        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C7440455FE4875A0');
+        $this->addSql('DROP INDEX IDX_C7440455FE4875A0 ON client');
+        $this->addSql('ALTER TABLE client DROP idcommand_id');
     }
 }

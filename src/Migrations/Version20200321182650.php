@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200218215900 extends AbstractMigration
+final class Version20200321182650 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,10 @@ final class Version20200218215900 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE `order` (id INT AUTO_INCREMENT NOT NULL, visit_date DATE NOT NULL, visit_duration NUMERIC(2, 1) NOT NULL, tickets_number INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE ticket (id INT AUTO_INCREMENT NOT NULL, first_name_visitor VARCHAR(50) NOT NULL, last_name_visitor VARCHAR(50) NOT NULL, birthday_visitor DATE NOT NULL, reduction TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE command ADD id_command VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C7440455FE4875A0');
+        $this->addSql('DROP INDEX IDX_C7440455FE4875A0 ON client');
+        $this->addSql('ALTER TABLE client ADD idcommand VARCHAR(255) NOT NULL, DROP idcommand_id');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +33,9 @@ final class Version20200218215900 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE `order`');
-        $this->addSql('DROP TABLE ticket');
+        $this->addSql('ALTER TABLE client ADD idcommand_id INT NOT NULL, DROP idcommand');
+        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C7440455FE4875A0 FOREIGN KEY (idcommand_id) REFERENCES command (id)');
+        $this->addSql('CREATE INDEX IDX_C7440455FE4875A0 ON client (idcommand_id)');
+        $this->addSql('ALTER TABLE command DROP id_command');
     }
 }
