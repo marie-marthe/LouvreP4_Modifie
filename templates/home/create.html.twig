@@ -1,15 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block content %}
 
 <h1> Informations visiteurs </h1>
 
 
 
-    {{ form_start(form) }}
+    {{ form_start(client) }}
 
+    {% for client in form.clients %}
+
+
+        {{ form_row(client.nbTicket) }}<br/>
+
+        {#}
+    {{ form_row(client.name) }}<br/>
+
+    {{ form_row(client.lastName) }}<br/>
+
+    {{ form_row(client.birthday) }}<br/>
+
+    {{ form_row(client.country) }}<br/>
+        {#}
 
     {{ form_end(form) }}
+
+    {% endfor %}
 
     <button type="submit" class="btn btn-success"> Valider </button>
 
