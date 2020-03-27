@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ path('accueil') }}">ACCUEIL</a></li>
-                <li><a href="{{ path('home') }}">BILLETTERIE</a> </li>
+                <li><a href="{{ path('form') }}">BILLETTERIE</a> </li>
              <li class="dropdown"></li>
             </ul>
         </div>
@@ -41,8 +41,7 @@
 
 <div class="w3-container">
 
-        {% block body %}
-            {% block content %}
+             {% block content %}
                 <div class="container-fluid" id="homepage-content">
                     <div class="row" id="carousel">
                         <div class="col-sm-12">
@@ -62,7 +61,7 @@
                                         <img src="{{ asset ('/build/images/1.40cae0e3.jpg') }}" class="img-responsive" alt="image 1">
                                         <div class="carousel-caption">
                                             <h3>Commander vos billets en ligne! </h3>
-                                            <a href="{{ path('home') }}">
+                                            <a href="{{ path('form') }}">
                                                 <button class="btn btn-default">Billetterie</button>
                                             </a><br/><br/>
                                             <P>
@@ -145,7 +144,6 @@
 
             {% endblock %}
 
-        {% endblock %}
 
     <footer style="margin-bottom: 0;padding-bottom: 0">
         <div class="panel-footer" style="text-align: right;margin-bottom:0">

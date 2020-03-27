@@ -1,62 +1,94 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Accueil{% endblock %}
+{% extends "base.html.twig" %}
 
 
-    {% block body %}
 
-        <h1 class="h3 mb-5 text-center">
-            Nouvelle réservation
-        </h1>
+    {% block content %}
 
-        {{ form_start(form) }}
+        <header class="masthead text-center text-white d-flex">
+            <div class="container my-auto">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <h1 class="text-uppercase">
 
-        {{ form_widget(form) }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-        {{ form_end(form) }}
 
-    {% endblock %}
+        <section>
+            <div class="container">
+                <div class="row">
 
-    {# we keep just  the widget in the persons row, this way we remove all the default text at once #}
-    {% block _reservation_persons_row %}
+                    <div class="col-lg-1">
+                    </div>
 
-        {{ form_widget(form) }}
 
-    {% endblock %}
+                    <div class="col-lg-11">
+                        <div class="container">
 
-    {# customizing the persons widget, creating all the code common to the whole persons collection at once which is a "visiteurs" title before the collection and the "ajoutez un visiteur" button to add a new visitor after the collection #}
-    {% block _reservation_persons_widget %}
 
-        <hr class="my-5">
+                            <p>{{ 'homepage.paragraph0' | trans }}</p>
 
-        <h2 class="h4 mb-3 text-center">
-            Visiteurs
-        </h2>
+                            <p>{{ 'homepage.paragraph1' | trans }}
+                            <ul>
+                                <li>{{ 'homepage.full.day.ticket' | trans }}</li>
+                                <li>{{ 'homepage.half.day.ticket' | trans }}</li>
+                            </ul>
+                            </p>
 
-        {{ form_widget(form) }}
+                            <br/>
 
-        <div class="form-group mb-5">
-            <button type="button" id="addPerson" class="btn btn-primary mt-4">
-                Ajoutez un visiteur
-            </button>
-        </div>
+                            <p><strong>{{ 'homepage.prices' | trans }} :</strong></p>
 
-    {% endblock %}
+                            <table>
+                                <tr>
+                                    <th>{{ 'homepage.array.tickets' | trans }}</th>
+                                    <th>{{ 'label.full.day.ticket' | trans }}</th>
+                                    <th>{{ 'label.half.day.ticket' | trans }}*</th>
+                                </tr>
 
-    {# generating the code of the persons (each element of the collection) which is mainly a delete button #}
-    {% block _reservation_persons_entry_row %}
-        <div class="form-group" id="block_{{id}}">
-            <hr class="my-5" id="hr_{{id}}">
-            {{ form_widget(form) }}
-            <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">
-                Supprimer le visiteur
-            </button>
-        </div>
-    {% endblock %}
+                                <tr>
+                                    <td>{{ 'homepage.first.price' | trans }}</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_PRICE') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_PRICE') }} euros</td>
+                                </tr>
 
-    {# handling the add and delete buttons #}
-    {% block javascripts %}
+                                <tr>
+                                    <td>{{ 'homepage.second.price' | trans }}</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_SENIOR') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_SENIOR') }} euros</td>
+                                </tr>
 
+                                <tr>
+                                    <td>{{ 'homepage.third.price' | trans }}**</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_DISCOUNT') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_DISCOUNT') }} euros</td>
+                                </tr>
+
+                                <tr>
+                                    <td>{{ 'homepage.fourth.price' | trans }}*** </td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::FULL_DAY_CHILD') }} euros</td>
+                                    <td>{{ constant('AppBundle\\Entity\\Ticket::HALF_DAY_CHILD') }} euros</td>
+                                </tr>
+                            </table>
+                            <div class="star">(*){{ 'discount.first.condition' | trans }} - (**){{ 'discount.second.condition' | trans }} - (***){{ 'discount.third.condition' | trans }}</div>
+                            <br/>
+
+                            <p>{{ 'homepage.recommandations' | trans }} </p>
+
+                            <br/>
+                            <div class="boutonbuy">
+                                <button type="button" class="btn btn-light btn-lg"><a href="{{ path('app_visit_order') }}">{{ 'button.buy.tickets' | trans }}</a></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
 
 
     {% endblock %}
