@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200321181551 extends AbstractMigration
+final class Version20200322224435 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,7 @@ final class Version20200321181551 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client ADD idcommand_id INT NOT NULL');
-        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C7440455FE4875A0 FOREIGN KEY (idcommand_id) REFERENCES command (id)');
-        $this->addSql('CREATE INDEX IDX_C7440455FE4875A0 ON client (idcommand_id)');
+        $this->addSql('ALTER TABLE client RENAME INDEX idx_c744045533e1689a TO IDX_C74404553301C60');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +30,6 @@ final class Version20200321181551 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C7440455FE4875A0');
-        $this->addSql('DROP INDEX IDX_C7440455FE4875A0 ON client');
-        $this->addSql('ALTER TABLE client DROP idcommand_id');
+        $this->addSql('ALTER TABLE client RENAME INDEX idx_c74404553301c60 TO IDX_C744045533E1689A');
     }
 }
