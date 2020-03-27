@@ -2,26 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  */
-class Client
+class Client extends \App\Entity\Booking
 {
-
-    const TYPE_HALF_DAY = 0;
-    const TYPE_FULL_DAY = 1;
-    const NB_TICKET_MAX_DAY = 1000;
-
-    const LIMITED_HOUR_TODAY = 16;
-
-
-
-    const IS_VALID_INIT = [];
-    const IS_VALID_WITH_TICKET = [];
-    const IS_VALID_WITH_CUSTOMER = [];
-    const IS_VALID_WITH_BOOKINGCODE = [];
 
 
     /**
@@ -60,15 +49,12 @@ class Client
      * @ORM\Column(type="decimal", precision=10, scale=0)
      */
     private $prices;
-    
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="id_command")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Booking", inversedBy="clients")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
-    private $idcommand;
-
+    private $booking;
 
 
     public function getId(): ?int
@@ -147,18 +133,18 @@ class Client
 
         return $this;
     }
-    
 
-    public function getIdCommand(): ?Command
+    public function getBooking(): ?Booking
     {
-        return $this->idcommand;
+        return $this->booking;
     }
 
-    public function setIdCommand(?Command $idcommand): string
+    public function setBooking(?Booking $booking): self
     {
-        $this->idcommand = $idcommand;
+        $this->booking = $booking;
 
         return $this;
     }
+
 
 }

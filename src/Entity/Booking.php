@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommandRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
  */
-class Command
+class Booking
 {
 
 
@@ -27,6 +27,18 @@ class Command
     const MIN_AGE_CHILD = 4;
     const MAX_AGE_CHILD = 12;
     const MIN_AGE_SENIOR = 60;
+
+
+    const IS_VALID_INIT = [];
+    const IS_VALID_WITH_TICKET = [];
+    const IS_VALID_WITH_CUSTOMER = [];
+    const IS_VALID_WITH_BOOKINGCODE = [];
+
+    const TYPE_HALF_DAY = 0;
+    const TYPE_FULL_DAY = 1;
+    const NB_TICKET_MAX_DAY = 1000;
+
+    const LIMITED_HOUR_TODAY = 16;
 
     /*
      * Exemples
@@ -80,22 +92,21 @@ class Command
 
     /**
      * @ORM\Column(type="integer")
+     *
      */
     private $nbTicket;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Client", mappedBy="idcommand")
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Client", mappedBy="booking", orphanRemoval=true)
      */
-    private $id_command;
-
+    private $clients;
 
 
     public function __construct()
     {
-        $this->id_command = new ArrayCollection();
+        $this->clients = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -175,35 +186,36 @@ class Command
         return $this;
     }
 
-
     /**
      * @return Collection|Client[]
      */
-    public function getIdCommand(): Collection
+    public function getClients(): Collection
     {
-        return $this->id_command;
+        return $this->clients;
     }
 
-    public function addIdCommand(Client $idCommand): Command
+    public function addClient(Client $client): self
     {
-        if (!$this->id_command->contains($idCommand)) {
-            $this->id_command[] = $idCommand;
-            $idCommand->setIdcommand($this);
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->setBooking($this);
         }
 
         return $this;
     }
 
-    public function removeIdCommand(Client $idCommand): self
+    public function removeClient(Client $client): self
     {
-        if ($this->id_command->contains($idCommand)) {
-            $this->id_command->removeElement($idCommand);
+        if ($this->clients->contains($client)) {
+            $this->clients->removeElement($client);
             // set the owning side to null (unless already changed)
-            if ($idCommand->getIdcommand() === $this) {
-                $idCommand->setIdcommand(null);
+            if ($client->getBooking() === $this) {
+                $client->setBooking(null);
             }
         }
 
         return $this;
     }
+
+
 }
