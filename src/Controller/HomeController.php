@@ -3,23 +3,20 @@
 namespace App\Controller;
 
 
-use App\Entity\Client;
-use App\Entity\Command;
-use App\Form\ClientsType;
-use App\Form\CommandType;
+use App\Entity\Booking;
+use App\Form\BookingType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Twig\Environment;
 
 class HomeController extends AbstractController
 
 {
 
     /**
+     * * Page 1 - Page d'accueil
      * clear the session and display the homepage
      *
      * @Route("/accueil", name="accueil")
@@ -35,33 +32,35 @@ class HomeController extends AbstractController
     }
 
 
-    /**
-     * recieve the mail with POST (from form in home), and redirect to reservation if the mail is unknown, or propose menu that propose to check existing reservations made with the email, or make a new reservation with that email. If the visitor want to change the mail, he can do so using the navbar.
+    /*
      *
+     * Page 2 - Initialisation de la visite - choix de la date / du type de billet / du nb de billets
      * @Route("/home", name="home")
-     * @param $request
+     * @param Request $request
+     * @param Booking $booking
+     * @param CommandController $CommandController
      * @return RedirectResponse|Response
-     */
-
-    public function form ( Request $request ) {
-
-        $command = new Command();
 
 
-        $forms= $this -> createForm(CommandType::class, $command);
+    public function form (Request $request, Booking $booking, CommandController $CommandController) {
 
-        $forms->handleRequest($request);
 
-        if($forms->isSubmitted() && $forms->isValid()) {
+
+        $booking= $CommandController->initVisit();
+
+        $form= $this -> createForm(BookingType::class, $booking);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $CommandController->generateTickets($booking);
 
             return $this->redirectToRoute('reservation'); // si tout est ok retourne à la page "reservation"
         }
 
-        return $this->render('home/home.html.twig',[
-            'form'=>$forms->createView()
-
-        ]);
-    }
+        return $this->render('home/home.html.twig', array('form'=>$form->createView()));
+    }*/
 
 }
 
